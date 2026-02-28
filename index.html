@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cephas Masimba | The Data Unicorn</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #0a0a0a;
+            --primary: #c29ffd; /* Unicorn Purple */
+            --accent: #5efce8; /* Neon Cyan */
+            --text: #f0f0f0;
+            --glass: rgba(255, 255, 255, 0.05);
+            --gradient: linear-gradient(135deg, var(--primary), var(--accent));
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Outfit', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg);
+            color: var(--text);
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+
+        /* --- Sections --- */
+        section {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem;
+            position: relative;
+        }
+
+        /* --- Hero Section --- */
+        .hero {
+            background: radial-gradient(circle at center, #1a1a2e 0%, #0a0a0a 100%);
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: clamp(3rem, 10vw, 6rem);
+            font-weight: 700;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 0.5rem;
+            letter-spacing: -2px;
+        }
+
+        .hero p {
+            font-size: clamp(1rem, 3vw, 1.5rem);
+            opacity: 0.8;
+            max-width: 600px;
+        }
+
+        .unicorn-badge {
+            background: var(--glass);
+            border: 1px solid var(--primary);
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 1.5rem;
+            display: inline-block;
+            color: var(--accent);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(94, 252, 232, 0.4); }
+            70% { box-shadow: 0 0 0 15px rgba(94, 252, 232, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(94, 252, 232, 0); }
+        }
+
+        /* --- Pitch Content --- */
+        .pitch-card {
+            background: var(--glass);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 3rem;
+            border-radius: 20px;
+            max-width: 900px;
+            width: 100%;
+            margin: 2rem 0;
+            transition: transform 0.3s ease;
+        }
+
+        .pitch-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .stat-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            width: 100%;
+            margin-top: 2rem;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-val {
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--accent);
+            display: block;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            opacity: 0.6;
+            text-transform: uppercase;
+        }
+
+        /* --- Chart Container --- */
+        .chart-container {
+            width: 100%;
+            max-width: 800px;
+            height: 400px;
+            margin-top: 2rem;
+        }
+
+        /* --- CTA Section --- */
+        .cta {
+            background: var(--gradient);
+            color: #000;
+            width: 100%;
+        }
+
+        .cta h2 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .btn {
+            background: #000;
+            color: #fff;
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .btn:hover {
+            background: transparent;
+            color: #000;
+            border-color: #000;
+        }
+
+        .investment-tag {
+            margin-top: 2rem;
+            font-weight: 700;
+            background: rgba(0,0,0,0.1);
+            padding: 1rem;
+            border-radius: 10px;
+        }
+
+        /* Floating Animation */
+        .floating {
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+            100% { transform: translateY(0px); }
+        }
+
+    </style>
+</head>
+<body>
+
+    <section class="hero">
+        <div class="unicorn-badge">Ultra-Rare Unicorn Detected</div>
+        <h1 class="floating">CEPHAS MASIMBA</h1>
+        <p>Turning Data into Decisions. Turning Insights into Profit.</p>
+        <a href="#impact" class="btn" style="margin-top: 2rem;">Witness the Impact</a>
+    </section>
+
+    <section id="impact">
+        <div class="pitch-card">
+            <h2>The +20% Coffee Shop ROI</h2>
+            <p>I didn't just analyze data; I optimized the entire revenue engine of the business. By identifying peak transaction friction and streamlining staffing, I delivered a 20% profit increase in just months.</p>
+            
+            <div class="chart-container">
+                <canvas id="profitChart"></canvas>
+            </div>
+
+            <div class="stat-grid">
+                <div class="stat-item">
+                    <span class="stat-val">+20%</span>
+                    <span class="stat-label">Profit Uplift</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-val">3 Mo.</span>
+                    <span class="stat-label">Implementation Time</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-val">10%</span>
+                    <span class="stat-label">Waste Reduction</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <div class="pitch-card">
+            <h2>The Stack of a Unicorn</h2>
+            <p>I blend technical excellence with business strategy. I don't follow requirements; I define the path to success.</p>
+            <div class="stat-grid">
+                <div class="stat-item">
+                    <span class="stat-val">SQL</span>
+                    <span class="stat-label">Architectural Precision</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-val">PYTHON</span>
+                    <span class="stat-label">Automated Insights</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-val">STRATEGY</span>
+                    <span class="stat-label">Executive Leadership</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta">
+        <div class="investment-box" style="text-align: center;">
+            <h2>INVEST IN THE FUTURE</h2>
+            <p>I am not looking for a job. I am looking for a partnership to scale your business.</p>
+            <div class="investment-tag">
+                ASKING PRICE: R27,000 PM / INVESTMENT
+            </div>
+            <div style="margin-top: 3rem;">
+                <a href="mailto:cephaskudamasimba@gmail.com" class="btn">SECURE THE PARTNERSHIP</a>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        const ctx = document.getElementById('profitChart').getContext('2d');
+        const profitChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: ['Month 1', 'Month 2', 'Month 3', 'Month 4', 'Month 5', 'Month 6'],
+                datasets: [{
+                    label: 'Profit Growth (%)',
+                    data: [100, 102, 105, 112, 118, 120],
+                    borderColor: '#5efce8',
+                    backgroundColor: 'rgba(94, 252, 232, 0.2)',
+                    fill: true,
+                    tension: 0.4,
+                    borderWidth: 4,
+                    pointRadius: 6,
+                    pointBackgroundColor: '#c29ffd'
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    y: {
+                        beginAtZero: false,
+                        grid: { color: 'rgba(255, 255, 255, 0.1)' },
+                        ticks: { color: '#f0f0f0' }
+                    },
+                    x: {
+                        grid: { display: false },
+                        ticks: { color: '#f0f0f0' }
+                    }
+                },
+                plugins: {
+                    legend: { display: false }
+                }
+            }
+        });
+
+        // Simple scroll reveal
+        window.addEventListener('scroll', () => {
+            const sections = document.querySelectorAll('section');
+            sections.forEach(section => {
+                const rect = section.getBoundingClientRect();
+                if (rect.top < window.innerHeight * 0.8) {
+                    section.style.opacity = '1';
+                    section.style.transform = 'translateY(0)';
+                }
+            });
+        });
+    </script>
+</body>
+</html>
